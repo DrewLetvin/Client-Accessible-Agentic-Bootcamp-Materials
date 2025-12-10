@@ -42,9 +42,7 @@ This first agent will help with the recruiting process. Follow these steps to bu
 
 1. Open watsonx Orchestrate. You will see the screen below. Then, click on **Create an Agent** at the bottom left:
 
-<img width="1681" alt="welcome" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/6a7b9866-09ae-4c89-8902-20a8930f0e7a">
-<br>
-<br>
+![Agent Name and Desc](../assets/images/a1.png)
 
 2. Enter the following into the name and description, then click **Create**:
 Name:
@@ -69,14 +67,7 @@ Your responses should be objective, evidence-based, and formatted in clear bulle
 
 ![Chat W/ Documents](../assets/images/i3a.png)
 
-5. Now let's deploy the agent by clicking on the blue **Deploy** button. This is how we transition the agent from the draft environment to the live environment in watsonx Orchestrate.
-
-<img width="600" alt="deploy" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/3d079a57-5969-4889-bd04-90a06e28d960">
-<br>
-<br>
-
-
-6. Now let's simmulate what the HR manager would do to automatically process résumés. First, download the résumés and job description files provided by your instructor.
+5. Now let's simmulate what the HR manager would do to automatically process résumés. First, download the résumés and job description files provided by your instructor.
 
 You should have access to the following files before proceeding:
 - [Candidate 1's Résumé](../data/Candidate%201.pdf)
@@ -86,18 +77,11 @@ You should have access to the following files before proceeding:
 - [Candidate 5's Résumé](../data/Candidate%205.pdf)
 - [Job Description](../data/Job%20Description.pdf)
 
+6. You will see a confirmation of the files being uploaded as follows:
 
-<img width="600" alt="live" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/e4e4480c-4629-430f-aef2-7ebb64c25b26">
-<br>
-<br>
+![Agent Name and Desc](../assets/images/a2.png)
 
-7. You will see a confirmation of the files being uploaded as follows:
-
-<img width="685" alt="upload" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/4849445e-8936-44f4-9915-76850bd0841c">
-<br>
-<br>
-
-8. Now let's try a few different prompts to process the résumés and match them with the job description. First, let's summarize the skills and requirements in the job description:
+7. Now let's try a few different prompts to process the résumés and match them with the job description. First, let's summarize the skills and requirements in the job description:
 
 ```
 Above, I have uploaded 5 documents with candidate resumes and one document with job description. Can you give me a short one-paragraph summary of the job description?
@@ -198,36 +182,57 @@ Draft an email to Emma to invite her for an interview with Aisha. Use Aisha's av
 ![Test Q](../assets/images/i14.png)
 
 
-## 📝 HR case review agent
+## 📝 HR Case Review Agent
 
-1. Create another agent as you did earlier. This time, add the following to the description:
+1. Create another agent as you did earlier. This time, add the following name and description:
+
+Name:
 ```
-This agent reviews HR cases from employee complaints of potential business conduct guidelines violations
+HR Case Review Agent
+```
+Description:
+```
+This agent reviews HR cases from employee complaints of potential business conduct guidelines violations. Use your knowledge to assist in answering user requests.
+```
+Then click **Create**
+
+![HR Agent](../assets/images/a3.png)
+
+2. Update the Model to **GPT-OSS 120B**
+
+![HR Agent](../assets/images/a1a.png)
+
+3. Add knowledge to it. Scroll down for the **Knowledge** section and click on **Choose Knowledge**
+
+![HR Agent](../assets/images/a4.png)
+
+4. Select **New Knowledge**
+
+![HR Agent](../assets/images/a5.png)
+
+5. Then, Select **Upload Files**
+
+![HR Agent](../assets/images/a6.png)
+
+6. . Now you will upload the [IBM Business Conduct Guideliness Document](../data/ibm_business_conduct_guidelines.pdf). You can also experiment with your company's BCG if available. Enter a description. It could be something like this:
+
+![HR Agent](../assets/images/a7.png)
+
+Then, add the name and description:
+
+Name:
+```
+Business Conduct Guidelines
+```
+Description:
+```
+This is the IBM Business Conduct Guidelines, it describes rules and guidelines that employees must follow to stay compliant with the company's HR rules.
 ```
 
-<img width="723" alt="Screenshot 2025-09-25 at 10 59 02 AM" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/6a49ad39-b869-4846-be4a-43216386fdd7">
-<br>
-<br>
+![HR Agent](../assets/images/a8.png)
 
-2. Add knowledge to it. Scroll down for the **Knowledge** section and click on **Choose Knowledge**
 
-<img width="733" alt="Screenshot 2025-09-25 at 10 58 53 AM" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/88c73733-5121-4f27-96d6-cb892c7cb84a">
-<br>
-<br>
-
-3. Now you will upload the [IBM Business Conduct Guideliness Document](../data/ibm_business_conduct_guidelines.pdf). You can also experiment with your company's BCG if available. Enter a description. It could be something like this:
-
-```
-This is the IBM Business Conduct Guidelines
-```
-
-After saving, will see something like this:
-
-<img width="704" alt="Screenshot 2025-09-25 at 11 01 08 AM" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/ed0ff06f-3243-4b28-a8af-d82cfdf6c2d6">
-<br>
-<br>
-
-4. Next, scroll down until you reach the *Behavior* section. Here we will provide more explicit instructions for the agent describing how we want it to behave. You can think of this as the core of our prompt to the agent.
+7. Next, scroll down until you reach the *Behavior* section. Here we will provide more explicit instructions for the agent describing how we want it to behave. You can think of this as the core of our prompt to the agent.
 
 Copy the following description:
 ```
@@ -242,36 +247,40 @@ Use the Business conduct guidelines provided in your knowledge to answer user qu
 Help me understand if the following complaint from an employee infringes the IBM Business Conduct Guidelines: "my manager raised his voice and called me names and made fun of me and told me really nasty things every day for the past month"
 ```
 
-<img width="683" alt="Screenshot 2025-09-25 at 11 03 56 AM" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/2c88e831-a267-4cc2-9c5c-9ddc03b75d19">
-<br>
-<br>
+![HR Agent](../assets/images/a9.png)
 
 Next let's try something that might be slightly more ambiguous:
 ```
 How about this one: my manager gave me a chocolate from Hawaii after her trip to Maui. Is this a BCG violation?
 ```
 
-<img width="680" alt="Screenshot 2025-09-25 at 11 07 56 AM" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/e2326cb3-7a42-456c-aa47-c4bc6ee6d981">
-<br>
-<br>
+6. Responses to our last query are prone to inconsistencies due to ambiguity in how large the gift in question might be. In many cases we would not expect this to violate the Business Conduct Guidelines. We can tweak the agent to address certain situations differently. For that we can use the **Guidelines** feature. 
+Drop down the menu next to **Behavior**
 
-6. Responses to our last query are prone to inconsistencies due to ambiguity in how large the gift in question might be. In many cases we would not expect this to violate the Business Conduct Guidelines. We can tweak the agent to address certain situations differently. For that we can use the **Guidelines** feature. Scroll down to the **Guidelines** section and click on **New Guideline**:
+Scroll down to the **Guidelines** section and click on **New Guideline**:
 
-<img width="706" alt="Screenshot 2025-09-25 at 3 52 41 PM" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/12cf07ec-efea-4e2a-8c15-a3e60455e782">
-<br>
-<br>
+![HR Agent](../assets/images/a10.png)
 
-7. Save it and try the same query one more time in the chat. You should see something like this:
+Add the following details:
 
-<img width="623" alt="Screenshot 2025-09-25 at 3 53 09 PM" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/1d13bc4a-5844-4f00-8137-25b5c1f7b859">
-<br>
-<br>
+Name:
+```
+Gifts for employees
+```
+Condition:
+```
+user request is related to gifts for employees
+```
+Action:
+```
+If the gift is likely >$15 it is a violation, otherwise it is okay
+```
 
-8. The result after retrying the same query would look like this:
+Then click **Save**
 
-<img width="678" alt="Screenshot 2025-09-25 at 11 11 26 AM" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/0bf1d4ae-c5ba-4b52-8d81-23bfc8d464ee">
-<br>
-<br>
+![HR Agent](../assets/images/a11.png)
+
+7. Save it and try the same query one more time in the chat.
 
 ## 🎯 HR Manager Agent (Orchestrator)
 
@@ -294,37 +303,37 @@ This agent routes user requests to it's 2 agents and returns their output:
 2. HR Case Reviewer: processing HR complaints or cases submitted by employees as potential violations to the Business Conduct Guidelines
 ```
 
-<img width="1106" alt="createagent" src="https://github.ibm.com/user-attachments/assets/08d3a05c-f0c8-453e-a4a2-63a91bc6ae37" />
+![Create Agent](../assets/images/createagent.png)
 <br>
 <br>
 
 2. Select GPT-OSS as the model.
 
-![Screenshot 2025-12-09 at 10 09 40 AM](https://github.ibm.com/user-attachments/assets/17ce10b2-03a0-4753-8277-bb1292e6070d)
+![Select Model](../assets/images/selectgroq.png)
 <br>
 <br>
 
 3. Scroll down to the Agents section.
 
-<img width="868" alt="scrolldowntoagents" src="https://github.ibm.com/user-attachments/assets/3929822f-5fcc-48af-af10-fecb9a94e22f" />
+![Agents](../assets/images/scrolldowntoagents.png)
 <br>
 <br>
 
 4. Select Add from Local Instance
 
-<img width="796" alt="localreal" src="https://github.ibm.com/user-attachments/assets/117c2db7-318b-4d5a-af54-a73ed893e7d4" />
+![Add from Local](../assets/images/localreal.png)
 <br>
 <br>
 
 5. Search for the two agents you just created and add them both.
 
-<img width="1386" alt="select2agents" src="https://github.ibm.com/user-attachments/assets/79b3db1b-bca5-4287-a6d8-d96b69a51897" />
+![Select Agents](../assets/images/select2agents.png)
 <br>
 <br>
 
 Now your Talent Acquisition Agent and HR Case Review Agents will show up as subagents for the HR Manager Agent
 
-<img width="745" alt="Screenshot 2025-12-08 at 12 12 27 PM" src="https://github.ibm.com/user-attachments/assets/8cdd51d5-4e75-4df0-828b-77d054e17fd3" />
+![Sub Agents](../assets/images/showup.png)
 <br>
 <br>
 
@@ -351,7 +360,7 @@ Show me software engineer interviewers and their availabilities
 ```
 
 ```
-Help me understand if the following complaint from an employee infringes the IBM Business Conduct Guidelines: "my manager called me names in a team meeting
+Help me understand if the following complaint from an employee infringes the IBM Business Conduct Guidelines: "my manager called me names in a team meeting"
 ```
 
 ```
