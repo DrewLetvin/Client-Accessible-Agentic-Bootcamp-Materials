@@ -54,7 +54,7 @@ This use case utilizes the capabilities of a watsonx Orchestrate agent to extrac
 ## 📝 Step-by-step Hands-on Lab
 You can find step-by-step instructions here :
 
-[Step-by-step hands-on guide](./hands-on-lab-buisness-automation.md)
+[Step-by-step hands-on guide](./hands-on-lab-business-automation.md)
 
 ## Demo Video
 A video demo of the solution is below:

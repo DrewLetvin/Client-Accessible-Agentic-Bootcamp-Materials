@@ -1,4 +1,4 @@
-# 🧑‍💼 AskHR
+# 🧑‍💼 AskHR: Automate HR Tasks with Agentic AI
 
 <img alt="AskHR" src="assets/hr_landscape.jpg">
 
@@ -46,12 +46,12 @@ To streamline employee interactions with HR systems, we have designed an AI-driv
 
 - **HR Agent and App (IBM watsonx Orchestrate)**: The HR agent acts as the central orchestrator, managing user interactions and delegating tasks to appropriate tools in the HR App.
 
-It has a collection of reusable tools, RAG agent powered by OpenAPI and metadata descriptions. Each tool is designed to perform a specific HR-related task, such as:
+It has a collection of reusable tools powered by OpenAPI and Company Benefits Knowledge documents. Each tool is designed to perform a specific HR-related task, such as:
 Checking time-off balances
 Submitting time-off requests
 Updating personal details (business title, home address)
 
-RAG Agent retrieves relevant information from documents to answer user queries
+HR Agent retrieves relevant information from Company Benefits Knowledge documents to answer related queries
 
 - **Human Capital Management (HCM) System**: The HR app communicates with the underlying HCM system to fetch or update employee data, ensuring real-time synchronization and accuracy.
 
@@ -59,10 +59,7 @@ RAG Agent retrieves relevant information from documents to answer user queries
 ## 🎥 Demo
 
 
-
-
-
-https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/449286/49242ff6-57e3-4de8-b0d1-57c97212d590
+https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/449286/ae5718a9-cc03-44f3-bd58-a9e3aa227271
 
 
 
@@ -70,7 +67,7 @@ https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/449286/49242ff6-57
 
 
 > [!IMPORTANT]
-> This lab uses a simulator for a Human Capital Management system. However, this could be easily changed to any real system running in production such as Workday or others.
+> **This lab uses a simulator for a Human Capital Management system. However, this could be easily changed to any real system running in production such as SAP SuccessFactors.  The optional part of this lab demonstrates how to leverage out-of-the-box domain agents in watsonx Orchestrate to connect to SAP.**
 
 
 ## 📄 Hands-on step-by-step lab

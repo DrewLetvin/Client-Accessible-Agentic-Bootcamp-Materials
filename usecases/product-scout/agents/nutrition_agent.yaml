@@ -1,0 +1,9 @@
+spec_version: v1
+style: default
+name: NutritionAndGuidelines
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
+description: >
+  This agent provides explanations of nutrition scores/grades as well as overall dietary guidelines.
+#knowledge_base:
+#  - nutrition_and_guidelines
+hidden: false

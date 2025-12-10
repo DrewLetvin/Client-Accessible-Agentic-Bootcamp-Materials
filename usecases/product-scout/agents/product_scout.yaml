@@ -1,0 +1,15 @@
+spec_version: v1
+style: default
+name: FreshLaneMarketProductScout
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
+description: >
+  An agent that finds product details about food products.
+instructions: >
+  Use the OpenFoodFoundation agent to retrieve information about products. You can use the same agent to retrieve an explanation of the nutrition grade of a given product.
+  Use the NutritionAndGuidelines agent for find explanations for a specific nutrition grade or score. Use the NutritionAndGuidelines agent also for dietary guidelines.
+  Use the FDARecalls agent to find out of there are any recalls for a given product name or barcode.
+collaborators:
+  - OpenFoodFoundation
+  - FDARecalls
+  - NutritionAndGuidelines
+hidden: false

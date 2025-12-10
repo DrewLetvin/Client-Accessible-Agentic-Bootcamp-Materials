@@ -3,7 +3,7 @@
 **Note:**  Follow these brief instructions to create an IBMID. These are specifically for our Business Partners and clients who may not have access to a TechZone environment previously. IBM employees do not need to register. 
 Clients and Business Partners MUST have an IBMID BEFORE you invite them to the workshop environments. They will NOT receive email inviting them to the workshop account unless they already have an IBMID.
 
-1. Start by accessing the [IBMid Registration Page](https://www.ibm.com/account/reg/signup?formid=urx-19776&)
+1. Start by accessing the [IBMid Registration Page].(https://www.ibm.com/account/reg/signup?formid=urx-19776&)
 2. Enter the required information in the fields provided, such as Email address, name, company, and country.
 
 ```IMPORTANT: Your email address becomes your IBMid, which you will use to access the bootcamp environment!```

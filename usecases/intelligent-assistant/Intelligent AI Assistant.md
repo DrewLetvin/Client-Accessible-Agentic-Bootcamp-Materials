@@ -31,8 +31,16 @@ Even though we will take you through a complete and working example, you should 
 
 ### Pre-requisites
 
-- Check with your instructor to make sure **all systems** are up and running before you continue.
-- If you're an instructor running this lab, check the **Instructor's guides** to set up all environments and systems.
+**Instructors**: 
+- Check the corresponding [Instructor's guide](https://github.ibm.com/skol/agentic-ai-client-bootcamp-instructors/tree/main/usecase-setup/intelligent-assistant) to set up all environments and backend services.
+  > NOTE: the `main` branch contains the latest release code. If you want to use a previous release, download the same [release](https://github.ibm.com/skol/agentic-ai-client-bootcamp-instructors/releases) that will be used for participants' lab. 
+ 
+**Participants**:
+- Validate that you have access to the right TechZone environment for this lab.
+- Complete the [environment-setup](../../environment-setup) guide for steps on API key creation and project setup.
+- Make sure you have created a [**watsonx** project](../../environment-setup/create-project.md) and a [Deployment Space](https://www.ibm.com/docs/en/watsonx/saas?topic=spaces-creating-deployment) in your **watsonx** project. 
+- Validate that you have access to a credentials file that your instructor will share with you before starting the labs.
+- Familiarity with AI agent concepts (e.g., instructions, tools, collaborators...)
 
 ## watsonx Orchestrate
 
@@ -65,12 +73,16 @@ However, you can already interact with the Large Language Model (LLM) that works
 Go ahead and chat with watsonx Orchestrate to explore what type of answers it gives to your questions.
 
 ### AI Agent Configuration
-We are now ready to build the first agent. In the watsonx Orchestrate console, click on either `Create or Deploy` or `Create new agent` (either will goet you to he same place).
+We are now ready to build the first agent. In the watsonx Orchestrate console, click on either `Create or Deploy` or `Create new agent` (either will get you to the same place).
 
 ![alt text](images/image4.png)
 
 ### The Dock Status Agent
-In the following screen, you can select if you want to create the new agent from scratch or from a template, and give it a name and a description.
+In the following screen, click on `Create agent`.
+
+![alt text](images/image33.png)
+
+On the following page, you can select if you want to create the new agent from scratch or from a template, and give it a name and a description.
 To create the solution, you will need to create a number of agents and we will go through them one by one, starting with the `Dock Status` agent. Let's start by giving it a name  and a description:
 - Name: Dock Status Agent
 - Description: 
@@ -84,11 +96,19 @@ After you have entered the required information, click on `Create`.
 
 ![alt text](images/image5.png)
 
-On the following screen, we can enter more information about the new agent we are building. Agents can rely on `Knowledge`, on a `Toolset` that consists of one or more `Tools` and one or more `Agents` to satisfy a request that is sent to them, and we can define all of those elements here. 
+On the following screen, we can enter more information about the new agent we are building. Agents can rely on `Knowledge`, on a `Toolset` that consists of one or more `Tools` and one or more `Agents` to satisfy a request that is sent to them. Moreover, you can pick the `AI Model` that it uses under the covers, as well as the `Agent style` and the `Voice modality`. We can define all of those elements here. 
 - `Knowledge` represents information that is stored in the form of "embeddings" in a so-called Vector Store. Whenever the agent answers a request, it can choose to run a search against the connected Knowledge repository (i.e. the Vector Store) to search for information that can assist in answering the request. You can either upload documents directly here, or connect the agent to an already existing repository. Note that once again, the "Description" field is key, because it will help the agent decide whether to run a search against the knowledge.
 - The `Toolset` contains other components that the agent can delegate certain tasks to. 
   - `Tools` are functions an agent can call. It can be either an API call or an invocation of custom code. This allows to extend the agent's capabilitiy beyond what the LLM has been trained with.
   - `Agents` are other agents, either within watsonx Orchestrate or running externally, e.g., in watsonx.ai that this agent can delegate the request, or part of a request, to.
+
+Moreover, you can specify the Large Language Model that he agent will use, as well as the "style" of the agent. For this agent (as well as all others below), we will pick the `llama-3-405b-instruct` model. 
+
+![alt text](images/image35.png)
+
+For the style, we will pick the `ReAct` style.
+
+![alt text](images/image36.png)
 
 In a real production deployment, the Dock Status agent would sit in front of an existing enterprise backend system that can provide up-to-date data about trucks currently sitting at warehouse docks, and keep track of products and their quantity that are being unloaded.
 However, in this hands-on exercise, we will simulate that backend by simply hardcoding the data into the `Behavior` field of the agent. The content of this field drive the prompts that are sent to the underlying LLM, and adding the hardcoded data equates to providing examples in the prompt. So, for the purpose of simulating data stemming from an enterprise system, we can use this workaround. Note how the instructions provide detailed information about both the persona and the context this agent operates with.
@@ -177,11 +197,15 @@ Let's now test the new agent. In the Preview window, enter a question for the ag
 
 ![alt text](images/image7.png)
 
-> When doing this in your own instance, you may see answers that differ from the ones shown in the screenshot above. Moreover, the agent will often ask follow-up questions before offering an answer. This is due to the undeterministic nature of the AI models involved. Feel free to experiment with different types of questions to see how the agent reacts. The same equally applies to all the agents described further down.
+> When doing this in your own instance, you may see answers that differ from the ones shown in the screenshot above. In some cases, the agent might ask follow-up questions before offering an answer. This is due to the undeterministic nature of the AI models involved. Feel free to experiment with different types of questions to see how the agent reacts. The same equally applies to all the agents described further down.
 
 You can now go ahead and deploy the agent, using the `Deploy` button at the top right of the page.
 
 ![alt text](images/image8.png)
+
+On the next page you can define any "connections" your agent uses. This would be used to define credentials and other data that is needed for the agent to connect to a separate backend. Since our agent has no such dependency, we can leave it empty and simply click on `Deploy`.
+
+![alt text](images/image34.png)
 
 Now let's go back to the Agents list on the Manage agents page, by clicking on the `Manage agents` link at the top left of the page.
 
@@ -205,7 +229,7 @@ The Surplus Agent provides recommendations about the handling of surplus data. I
 
 Then click on `Create`.
 
-In the following view, scroll all the way down to the `Behavior` section, and enter the following into the `Instructions` field:
+In the following view, select the `llama-3-405b-instruct` model and set the agent style to `RAct`. Then scroll all the way down to the `Behavior` section, and enter the following into the `Instructions` field:
 ```
 Persona:
 - Your purpose is to provide information about surplus. I will ask about the recommended handling of surplus on a specific truck, and you will answer in a detailed format with the allocation strategy based on the given data, along with truck id, Product SKU, total cost, surplus unit.
@@ -270,7 +294,7 @@ How do we handle the surplus on truck T001?
 
 ![alt text](images/image13.png)
 
-Once you are satisfied with the result, click on the `Deploy` button to deploy this agent, and then click on the `Manage agents` link to return to the agents overview page.
+Once you are satisfied with the result, click on the `Deploy` button to deploy this agent, leave the connections list empty and click on `Deploy` again. Then click on the `Manage agents` link to return to the agents overview page.
 
 You should now see two agents listed, and both should have the "Live" indicator.
 
@@ -287,7 +311,7 @@ Click on Create agent and enter the following:
 The Secretary Agent specializes in creating emails related to warehouse topics. 
 ```
 
-Then click on Create and add the following text to the `Instructions` field in the Behavior section:
+Then click on Create. Select the `llama-3-405b-instruct` model (leave the agent style on `Default`) and add the following text to the `Instructions` field in the Behavior section:
 ```
 Persona:
 - Your persona is that of a secretary that drafts emails. I will ask you to create an email about a topic, and you will return a textual draft of that email.
@@ -348,7 +372,7 @@ Uncheck `Show agent`. Then test the new agent with the Preview, for example, ent
 
 ![alt text](images/image15.png)
 
-Make sure you click the `Deploy` button again and return to the agent overview window by clicking the `Manage agents` link at the top left of the window.
+Make sure you click the `Deploy` button again, then once again and return to the agent overview window by clicking the `Manage agents` link at the top left of the window.
 
 ### The Traffic Agent
 
@@ -371,6 +395,8 @@ The Warehouse Manager Agent is in charge of routing user requests to the most re
 After you have entered the information, click on `Create`.
 
 ![alt text](images/image17.png)
+
+And as before, change the model to `llama-3-405b-instruct` and leave the agent style as `Default`.
 
 We had mentioned above that an agent can collaborate with other agents to fulfill a certain task. You enter those collaborator agents in the `Agents` section under `Toolset` in the agent definition window.
 
@@ -406,9 +432,7 @@ On the following screen, enter details about the imported agent:
 
 Now click on `Import agent`. You should now see all four agents listed in the Toolset section of the Warehouse Manager Agent.
 
-![alt text](images/image24.png)
-
-Finally, we give this agent instructions about how to use the collaborator agents we defined earlier. Enter the folllowing text in the `Instructions` field under Behavior.
+Finally, we give the Warehouse Manager agent instructions about how to use the collaborator agents we defined earlier. Enter the folllowing text in the `Instructions` field under Behavior.
 ```
 Reasoning:
 - Use the Dock Status Agent for tasks related to dock status.
@@ -446,7 +470,7 @@ Now you can enter your questions and requests in the main chat window. Note how 
  
 ![alt text](images/image30.png)
 
-We encourage you to explore the behavior of the solution further, by asking more "loaded" questions, which involve more than one agent to answer. For example, you could ask "Please tell me about the status of the warehouse docks and let me know what to do with surplus if there is any." Note how you may get asked follow-up clarification questions by the agent, to retrieve more specific information, for example, which exact truck ID you are asking about.
+We encourage you to explore the behavior of the solution further, by asking more "loaded" questions, which involve more than one agent to answer. For example, you could ask "Please tell me about the status of the warehouse docks and let me know what to do with surplus if there is any. Please check all dock IDs and all product SKUs." Note how you may get asked follow-up clarification questions by the agent, to retrieve more specific information, for example, which exact truck ID you are asking about.
 What this is trying to show is how you can send fairly detailed questions and instructions to an agent, but you can also give it more autonomy in how to address a request, by involving multiple agents and tools.
 
 ![alt text](images/image32.png)

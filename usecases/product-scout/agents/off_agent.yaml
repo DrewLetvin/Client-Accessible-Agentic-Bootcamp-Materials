@@ -1,0 +1,13 @@
+spec_version: v1
+style: default
+name: OpenFoodFoundation
+llm: watsonx/meta-llama/llama-3-405b-instruct
+description: >
+  An agent that finds product details about food products from the Open Food Foundation.
+instructions: >
+  Use the off_search_tool to find products' bar codes matching the search string, then always use the off_product_tool to retrieve details about the product that matches the ask best.
+  If parameters are missing, use default values.
+tools:
+  - off_search_tool
+  - off_product_tool
+hidden: false
