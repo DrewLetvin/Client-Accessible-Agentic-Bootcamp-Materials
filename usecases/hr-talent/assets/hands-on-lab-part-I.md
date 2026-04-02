@@ -1,41 +1,3 @@
-
-# 🧑‍💼 Agentic HR Manager
-
-## Table of Contents
-
-**Introduction**
-- [💡 Use case description](#use-case-description)
-
-**Part I**
-- [🥇 Talent acquisition agent](#-talent-acquisition-agent)
-- [📝 HR case review agent](#-hr-case-review-agent)
-- [🎯 HR Manager Agent](#-hr-manager-agent-orchestrator)
-
-**Part II**
-- [🤖 Automate talent acquisition agent using agentic workflows](#-automate-talent-acquisition-agent-using-agentic-workflows)
-    
-## 💡 Use Case Description
-
-**Luisa** is an HR manager for a large corporation that's looking to hire many employees as part of an effort to set up a new division. Her struggle is two-fold:
-
-1. **Recruiting candidates** for their open positions
-2. **Handling reports** from existing employees for potential Business Conduct Guidelines violations.
-
-For recruiting, Luisa must evaluate candidate résumés.  
-Some of the relevant steps in this process include:
-
-- Check if candidates **fulfill the requirements** of a given position
-- Fill in a **table** with the skills/experience of each candidate
-- Select **candidates** to be interviewed
-- Assign **interviewers** from the team
-- Coordinate **interviews** with candidates and interviewers via email
-- Schedule **interviews**
-- Compile **feedback** from different reviewers
-- **Report back** the results to the hiring manager
-
-Luisa would like to make her hiring process more efficient.
-
-# Part I
 ## 🥇 Talent acquisition agent
 
 This first agent will help with the recruiting process. Follow these steps to build your Talent Acquisition AI Agent:
@@ -59,7 +21,7 @@ Your responses should be objective, evidence-based, and formatted in clear bulle
 
 ![Agent Name and Desc](../assets/images/i1.png)
 
-3. From the model drop down, select **GPT-OSS 120B**
+3. We will use the **GPT-OSS 120B** model for this agent. If it is not already selected, choose the model from the drop down.
 
 ![Model](../assets/images/i2.png)
 
@@ -81,7 +43,14 @@ You should have access to the following files before proceeding:
 
 ![Agent Name and Desc](../assets/images/a2.png)
 
-7. Now let's try a few different prompts to process the résumés and match them with the job description. First, let's summarize the skills and requirements in the job description:
+7. Add the following to the **Behavior Section**:
+```
+You are an expert talent-screening assistant that evaluates how well candidates match the skills required in a job description. 
+Use the knowledge when it comes to checking availability and other information of interviewers.
+```
+![Agent Name and Desc](../assets/images/a12.png)
+
+8. Now let's try a few different prompts to process the résumés and match them with the job description. First, let's summarize the skills and requirements in the job description:
 
 ```
 Above, I have uploaded 5 documents with candidate resumes and one document with job description. Can you give me a short one-paragraph summary of the job description?
@@ -106,7 +75,7 @@ make a table where each row is a candidate and each column is a skill in the job
 ![Test Q](../assets/images/i11.png)
 
 
-You can see that Emma is the person which has the best match of skills. 
+At a glance we might decide that Emma has the strongest match of skillset to our job description. 
 However, the HR manager still needs to go and review Emma's profile and résumé before proceeding. 
 It is important to keep a human in the loop, especially when making decisions affecting people. 
 
@@ -157,7 +126,8 @@ This knowledge contains the has the availability and skills of different intervi
 ![Test Q](../assets/images/i8.png)
 
 
-16. Now let's run some additional queries for the interviews. First, let's check if the interviewer data was loaded properly:
+16. Now let's run some additional queries for the interviews. First, let's check if the interviewer data was loaded properly.
+*Note it might take a minute for the knowledge to fully upload. Once you see the confirmation you may proceed with the following input.*
 
 ```
 Show me the availability of interviewers
@@ -198,11 +168,11 @@ Then click **Create**
 
 ![HR Agent](../assets/images/a3.png)
 
-2. Update the Model to **GPT-OSS 120B**
+2. Once again we will use the **GPT-OSS 120B** model.
 
 ![HR Agent](../assets/images/a1a.png)
 
-3. Add knowledge to it. Scroll down for the **Knowledge** section and click on **Choose Knowledge**
+3. Our HR case review agent will need to know of the policies it is enforcing. To enable this lets add some knowledge. Scroll down to the **Knowledge** section and click on **Choose Knowledge**
 
 ![HR Agent](../assets/images/a4.png)
 
@@ -214,29 +184,29 @@ Then click **Create**
 
 ![HR Agent](../assets/images/a6.png)
 
-6. . Now you will upload the [IBM Business Conduct Guideliness Document](../data/ibm_business_conduct_guidelines.pdf). You can also experiment with your company's BCG if available. Enter a description. It could be something like this:
+6. . Now you will upload the [Ohio DAS Anti-Discrimination and Anti-Harassment Policy](../data/Anti-DiscriminationandAnti-HarassmentPolicyandReportingProcedures(HR-14)_DepartmentofAdministrativeServices.pdf) and the [Ohio DAS Employee Wrongdoing and/or Suspected Illegal Activity Policy](../data/EmployeeWrongdoingand_orSuspectedIllegalActivity_DepartmentofAdministrativeServices.pdf). You can also experiment with your company's other policies [Link to More Policies](https://das.ohio.gov/employee-relations/policies). Enter a description. It could be something like this:
 
-![HR Agent](../assets/images/a7.png)
+![HR Agent](./hands-on-lab-assets/upload2files.png)
 
 Then, add the name and description:
 
 Name:
 ```
-Business Conduct Guidelines
+Employee Wrongdoing Policies
 ```
 Description:
 ```
-This is the IBM Business Conduct Guidelines, it describes rules and guidelines that employees must follow to stay compliant with the company's HR rules.
+These documents include Ohio DAS Anti-Discrimintation and Anti-Harassment Policies and reporting procedures as well as Employee Wrongdoing or Suspected Illegal Activity policies. They describe rules and guidelines that employees must follow to stay compliant with the company's HR rules.
 ```
 
-![HR Agent](../assets/images/a8.png)
+![HR Agent](./hands-on-lab-assets/namedescription.png)
 
 
 7. Next, scroll down until you reach the *Behavior* section. Here we will provide more explicit instructions for the agent describing how we want it to behave. You can think of this as the core of our prompt to the agent.
 
 Copy the following description:
 ```
-Use the Business conduct guidelines provided in your knowledge to answer user questions regarding the guidelines. Source all of your answers in the business conduct guidelines.
+Always use the Employee Wrongdoing Policies provided in your knowledge to answer user questions regarding the guidelines. Source all of your answers in the Employee Wrongdoing Policies.
 ```
 
 ![Test Q](../assets/images/c1.png)
@@ -244,17 +214,24 @@ Use the Business conduct guidelines provided in your knowledge to answer user qu
 5. You're now ready to test some queries. First try asking the following:
 
 ```
-Help me understand if the following complaint from an employee infringes the IBM Business Conduct Guidelines: "my manager raised his voice and called me names and made fun of me and told me really nasty things every day for the past month"
+What protections do I have if I report harassment?
 ```
 
-![HR Agent](../assets/images/a9.png)
 
-Next let's try something that might be slightly more ambiguous:
+Let's try something a little more specific:
 ```
-How about this one: my manager gave me a chocolate from Hawaii after her trip to Maui. Is this a BCG violation?
+Help me understand if the following complaint from an employee infringes the Ohio DAS policies: "my manager raised his voice and called me names and made fun of me and told me really nasty things every day for the past month"
 ```
 
-6. Responses to our last query are prone to inconsistencies due to ambiguity in how large the gift in question might be. In many cases we would not expect this to violate the Business Conduct Guidelines. We can tweak the agent to address certain situations differently. For that we can use the **Guidelines** feature. 
+Now let's try something very general and not explicitly covered in our policy documents to see how our agent handles it:
+```
+My manager gave me a $100 gift card for Christmas. Is this allowed?
+```
+
+Feel free to test out your own questions about the policies uploaded as well!
+
+6. Responses to questions about reporting harassment or suspected wrongdoing may sometimes be unclear about how quickly someone should act. Our agent is also likely to hallucinate due to broad questions. To improve consistency and make responses more actionable, we can use the Guidelines feature. 
+
 Drop down the menu next to **Behavior**
 
 Scroll down to the **Guidelines** section and click on **New Guideline**:
@@ -280,7 +257,13 @@ Then click **Save**
 
 ![HR Agent](../assets/images/a11.png)
 
-7. Save it and try the same query one more time in the chat.
+7. Save it, refresh, and try the same query one more time in the chat:
+```
+My manager gave me a $100 gift card for Christmas. Is this allowed?
+```
+
+Our agent will now come back to us with an answer following the new guideline, without hallucinating.
+*Be sure to note the improved clarity of the response*
 
 ## 🎯 HR Manager Agent (Orchestrator)
 
@@ -300,14 +283,14 @@ This agent routes user requests to it's 2 agents and returns their output:
 
 1. Talent acquisition: processing resumes, job descriptions, interviewers, interviewer availability, routing to the talent acquisition agent
 
-2. HR Case Reviewer: processing HR complaints or cases submitted by employees as potential violations to the Business Conduct Guidelines
+2. HR Case Reviewer: processing HR complaints or cases submitted by employees as potential violations to the Employee Wrongdoing Policies
 ```
 
 ![Create Agent](../assets/images/createagent.png)
 <br>
 <br>
 
-2. Select GPT-OSS as the model.
+2. Once more we will use the GPT-OSS model.
 
 ![Select Model](../assets/images/selectgroq.png)
 <br>
@@ -342,47 +325,36 @@ Now your Talent Acquisition Agent and HR Case Review Agents will show up as suba
 When you receive a request from a user, you have 2 agents you should use to route questions to:
 Talent acquisition Agent: For any queries about processing resumes, job descriptions, interviewers, interviewer availability
 
-HR Case Reviews Agent: answering questions about HR-related rules, such as processing HR complaints or cases submitted by employees as potential violations to the Business Conduct Guidelines
+HR Case Reviews Agent: answering questions about HR-related rules, such as processing HR complaints or cases submitted by employees as potential violations to the Employee Wrongdoing Policies
 ```
+
+This will define when the Manager agent should utilize each available sub-agent.
 
 ![Agent Behavior](../assets/images/i76.png)
 
-7. Now try different queries on the HR Manager Agent
+7. Now lets test our top level HR Manager Agent. You can try the sample queries below, re-ask some of our test queries from before, or ask your own questions.
 
-
-(Upload job description document) 
-```
-Summarize this job description
-```
 
 ```
 Show me software engineer interviewers and their availabilities
 ```
 
 ```
-Help me understand if the following complaint from an employee infringes the IBM Business Conduct Guidelines: "my manager called me names in a team meeting"
+Help me understand if the following complaint from an employee infringes the Ohio DAS policies: "my manager called me names in a team meeting"
 ```
 
 ```
-Does this violate the business conduct guidelines for IBM? My manager gave me a souvenir from this trip to Italy.
+Can I report wrongdoing directly to law enforcement?
 ```
 
 ```
-I just got a new job offer. Can I keep my IBM laptop?
+Is there a deadline to file a discrimination complaint?
 ```
+  
 
-```
-What consistutes a conflict of interest?
-```
+**When testing your agent make sure to note the agent's reasoning. This allows us to see what tools, sub-agents, or knowledge was used to get our answer.**
+![Agent Behavior](../assets/images/i77.png)
 
-
-# Part II
-## 🤖 Automate talent acquisition agent using agentic workflows
-
-Earlier in the lab you built an agent leveraging the **Chat with documents** feature of watsonx Orchestrate to upload and interact with résumés, job descriiptions, and interviewer schedules. In this case the agent's LLM does all the heavy lifting while it is Luisa's role to provide the right prompt/query.  
-
-However, it is often not obvious what the right prompt should be creating room for ambiguity and inconsistency. Additionally, there may be deterministic steps that need to be taken every time such as automatically reaching out to the selected candidate or automatically scheduling an interview. In this case we might leverage **Agentic Workflows**.  
-
-*Disclaimer: The workflows portion of lab requires some familiarity with basic programming concepts such as variables and loops. If you have any questions please reach out to one of your instructors for clarification or assistance.* 
-
- **Please *[click here](./hands-on-lab-hr-manager-flows.md)* to proceed to the workflow portion of the lab.**
+## Conclusion
+This concludes Part I of our Lab. 
+ **Please *[click here](./hands-on-lab-overview.md)* to return to the Lab Overview.**

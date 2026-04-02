@@ -1,7 +1,5 @@
 # 🧑‍💼 Agentic HR Management
 `Chat with documents` `RAG` `Flows` `Intelligent Document Processing` `Multi-agent orchestration`
-<img width="993" alt="Screenshot 2025-09-24 at 3 57 57 PM" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/c86976cc-cb38-483a-b8c8-d48f24a70bf1">
-
 
 ## 🤔 The Problem
 
@@ -35,7 +33,7 @@ Luisa and her team would be able to save hundreds of hours spent scanning résum
 
 ## 🏛️ The solution
 
-<img width="1719" alt="Screenshot 2025-09-22 at 9 16 06 PM" src="https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/12043/9556f3ed-e49b-4355-b901-23f84ac85442">
+**TODO: Replace With Screenshot**
 
 ## 🎥 Demo
 
@@ -44,4 +42,4 @@ Coming soon
 
 ## 📄 Hands-on step-by-step lab
 
-Please find the step-by-step instructions [here](assets/hands-on-lab-hr-manager.md) on how you can implement this use case.
+Please find the step-by-step instructions [here](assets/hands-on-lab-overview.md) on how you can implement this use case.
